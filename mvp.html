@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VowFare — Transparent Wedding Planning</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --navy-dark: #0F1E2E;
+            --navy-primary: #182B3D;
+            --blush-light: #FBF4F4;
+            --blush-accent: #E8C5C8;
+            --gold-accent: #C5A059;
+            --text-main: #1C252C;
+            --text-muted: #62717D;
+            --white: #FFFFFF;
+            --border-light: #E5EAF0;
+            --success: #2e7d32;
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Montserrat', -apple-system, sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--text-main);
+            background-color: var(--blush-light);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 8%;
+            background: var(--white);
+            border-bottom: 1px solid var(--border-light);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            font-weight: 500;
+            color: var(--navy-dark);
+            text-decoration: none;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .logo span { color: var(--gold-accent); }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--navy-dark);
+            font-weight: 500;
+        }
+
+        .nav-btn {
+            background-color: var(--navy-dark);
+            color: var(--white);
+            padding: 0.75rem 1.6rem;
+            border-radius: 2px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 1px solid var(--navy-dark);
+            cursor: pointer;
+        }
+
+        .nav-btn:hover {
+            background-color: transparent;
+            color: var(--navy-dark);
+        }
+
+        header.hero {
+            text-align: center;
+            padding: 4.5rem 1.5rem 2.5rem;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .tagline-badge {
+            display: inline-block;
+            color: var(--gold-accent);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .hero h1 {
+            font-family: var(--font-serif);
+            font-size: 3.8rem;
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 1.2rem;
+            color: var(--navy-dark);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 720px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        .section-wrapper {
+            background: var(--white);
+            padding: 4rem 8%;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .section-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2.2rem;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-serif);
+            font-size: 2.6rem;
+            font-weight: 400;
+            color: var(--navy-dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .category-card {
+            background: var(--blush-light);
+            border: 1px solid var(--border-light);
+            padding: 1.2rem;
+            border-top: 3px solid var(--navy-dark);
+        }
+
+        .category-card label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.6rem;
+            color: var(--navy-dark);
+        }
+
+        .input-symbol-wrapper { position: relative; }
+
+        .input-symbol-wrapper span {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .input-symbol-wrapper input {
+            width: 100%;
+            padding: 0.75rem 0.8rem 0.75rem 2.2rem;
+            border: 1px solid var(--border-light);
+            font-size: 0.95rem;
+            font-family: var(--font-sans);
+            color: var(--text-main);
+            background-color: var(--white);
+        }
+
+        .input-symbol-wrapper input:focus {
+            outline: none;
+            border-color: var(--gold-accent);
+        }
+
+        .category-status {
+            margin-top: 0.6rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            min-height: 1.2rem;
+        }
+
+        .status-ok { color: var(--success); font-weight: 600; }
+
+        .total-banner {
+            background-color: var(--navy-dark);
+            color: var(--white);
+            padding: 1.8rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 2px;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .banner-stat span {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--blush-accent);
+            margin-bottom: 0.2rem;
+        }
+
+        .banner-stat strong {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            font-weight: 400;
+            color: var(--white);
+        }
+
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background-color: transparent;
+            border: 1px solid var(--border-light);
+            padding: 0.6rem 1.2rem;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .tab-btn.active {
+            background-color: var(--navy-dark);
+            border-color: var(--navy-dark);
+            color: var(--white);
+        }
+
+        .vendor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 2rem;
+        }
+
+        .vendor-card {
+            background: var(--white);
+            border: 1px solid var(--border-light);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .vendor-card.selected {
+            border-color: var(--gold-accent);
+            box-shadow: 0 4px 20px rgba(197, 160, 89, 0.15);
+        }
+
+        .badge-selected {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            padding: 0.2rem 0.6rem;
+            text-transform: uppercase;
+            background: var(--gold-accent);
+            color: var(--white);
+        }
+
+        .vendor-header {
+            margin-bottom: 1.2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .vendor-name {
+            font-family: var(--font-serif);
+            font-size: 1.7rem;
+            color: var(--navy-dark);
+            font-weight: 500;
+            line-height: 1.2;
+            padding-right: 2rem;
+        }
+
+        .vendor-price-wrap {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            margin-top: 0.3rem;
+        }
+
+        .vendor-price {
+            font-size: 1.3rem;
+            color: var(--gold-accent);
+            font-weight: 600;
+        }
+
+        .vendor-tier {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+
+        .vendor-services { margin-bottom: 1.5rem; }
+
+        .vendor-services h4 {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+        }
+
+        .service-list { list-style: none; }
+
+        .service-list li {
+            font-size: 0.85rem;
+            color: var(--text-main);
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .service-list li::before {
+            content: "•";
+            color: var(--gold-accent);
+            font-size: 1.2rem;
+        }
+
+        .vendor-contact {
+            background-color: var(--blush-light);
+            padding: 1rem;
+            font-size: 0.8rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-light);
+        }
+
+        .vendor-contact p { margin-bottom: 0.2rem; color: var(--text-muted); }
+        .vendor-contact strong { color: var(--navy-dark); }
+        .vendor-contact a { color: var(--navy-dark); text-decoration: underline; }
+
+        .select-btn {
+            width: 100%;
+            padding: 0.9rem;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+            border: 1px solid var(--navy-dark);
+            background: transparent;
+            color: var(--navy-dark);
+            cursor: pointer;
+        }
+
+        .select-btn:hover { background-color: var(--navy-dark); color: var(--white); }
+        .select-btn.selected { background-color: var(--gold-accent); border-color: var(--gold-accent); color: var(--white); }
+
+        .empty-vendor-notice {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem 1.5rem;
+            background: var(--white);
+            border: 1px dashed var(--border-light);
+        }
+
+        /* Summary / Output Drawer */
+        .summary-section {
+            background: var(--navy-dark);
+            color: var(--white);
+            padding: 4rem 8%;
+        }
+
+        .summary-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(232, 197, 200, 0.2);
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .summary-table th {
+            text-align: left;
+            padding: 0.8rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--blush-accent);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .summary-table td {
+            padding: 0.8rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-action-row {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            background-color: #08121d;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            .total-banner { flex-direction: column; text-align: center; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">VowFare<span>.</span></a>
+        <div class="nav-links">
+            <a href="#planner" class="nav-link">1. Set Budget</a>
+            <a href="#vendors" class="nav-link">2. Select Vendors</a>
+            <a href="#summary" class="nav-btn">View My Team</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="tagline-badge">You say “I do.” We help you do the rest.</div>
+        <h1>From “I do” to “done.”</h1>
+        <p>The transparent wedding planner MVP. Set your category targets, see only the vendors you can afford, and lock in direct contact details instantly.</p>
+    </header>
+
+    <!-- 1. Budget Targets -->
+    <div class="section-wrapper" id="planner">
+        <section class="section-container">
+            <div class="section-header">
+                <h2>1. Category Budget Targets</h2>
+                <p>Set your budget limits below. Vendors exceeding your allocation will be automatically hidden.</p>
+            </div>
+            
+            <div class="category-grid" id="categoryGrid"></div>
+
+            <div class="total-banner">
+                <div class="banner-stat">
+                    <span>Target Budget Total</span>
+                    <strong id="targetDisplay">$0</strong>
+                </div>
+                <div class="banner-stat">
+                    <span>Committed Vendor Spend</span>
+                    <strong id="selectedTotalDisplay">$0</strong>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 2. Vendor Selection -->
+    <div class="section-wrapper" id="vendors" style="background-color: var(--blush-light);">
+        <section class="section-container">
+            <div class="section-header">
+                <h2>2. Compare & Select Vendors</h2>
+                <p>Showing verified vendors within your target price.</p>
+            </div>
+
+            <div class="category-tabs" id="categoryTabs"></div>
+            <div class="vendor-grid" id="vendorGrid"></div>
+        </section>
+    </div>
+
+    <!-- 3. Final Bookings / Plan Summary -->
+    <section class="summary-section" id="summary">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 style="color: var(--white);">3. Your Selected Vendor Team</h2>
+                <p style="color: var(--blush-accent);">Direct contacts and contract estimates ready for booking.</p>
+            </div>
+
+            <div class="summary-card">
+                <table class="summary-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Vendor Selected</th>
+                            <th>Contract Price</th>
+                            <th>Direct Contact Info</th>
+                        </tr>
+                    </thead>
+                    <tbody id="summaryTableBody">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+                <div class="btn-action-row">
+                    <button class="nav-btn" onclick="window.print()">Print / Save Plan</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 VowFare MVP. Built for product validation testing.</p>
+    </footer>
+
+    <script>
+        const categories = [
+            { id: "venue", name: "Venue", defaultBudget: 8000, step: 500 },
+            { id: "catering", name: "Catering", defaultBudget: 5500, step: 250 },
+            { id: "photography", name: "Photography", defaultBudget: 3200, step: 200 },
+            { id: "videography", name: "Videography", defaultBudget: 2800, step: 200 },
+            { id: "flowers", name: "Flowers", defaultBudget: 2500, step: 100 },
+            { id: "dj", name: "DJ", defaultBudget: 1800, step: 100 }
+        ];
+
+        const vendors = [
+            // VENUE
+            { id: 101, categoryId: "venue", tier: "Community & Parks", name: "Oak Grove Pavilion", price: 3200, services: ["Full-day open pavilion access", "Picnic and banquet tables included", "On-site parking for 120 cars"], contact: { name: "Mark Peterson", email: "parks@oakgrovevenue.org", phone: "(555) 101-2001" } },
+            { id: 102, categoryId: "venue", tier: "Rustic Mid-Tier", name: "Cedar Ridge Barn", price: 5800, services: ["Climate-controlled timber barn", "Bridal getting-ready suite", "Fire pit lounge & outdoor lawn games"], contact: { name: "Hannah Brooks", email: "hannah@cedarridgebarn.com", phone: "(555) 101-2002" } },
+            { id: 103, categoryId: "venue", tier: "Modern Classic", name: "The Glass Greenhouse", price: 8500, services: ["12-hour property access", "Modern ceremony glass conservatory", "Full tables and Chiavari seating"], contact: { name: "Julian Vance", email: "events@glassgreenhouse.com", phone: "(555) 101-2003" } },
+            { id: 104, categoryId: "venue", tier: "Historic Estate", name: "Highland Manor Estate", price: 11500, services: ["Ballroom and grounds access", "Dedicated day-of coordination assistant", "Overnight stay for couple"], contact: { name: "Eleanor Hayes", email: "coordinator@highlandmanor.com", phone: "(555) 101-2004" } },
+            { id: 105, categoryId: "venue", tier: "Ultra Luxury", name: "The Grand Waterfront Villa", price: 16000, services: ["Private estate buyout for 48 hours", "Full valet staffing & docking privileges", "Dedicated concierge team"], contact: { name: "Christian Laurent", email: "vip@waterfrontvilla.com", phone: "(555) 101-2005" } },
+
+            // CATERING
+            { id: 201, categoryId: "catering", tier: "Casual Trucks", name: "Nomad Street Kitchens", price: 2800, services: ["Two gourmet food trucks on site", "Artisanal tacos and sliders", "Compostable eco tableware"], contact: { name: "Davey Rios", email: "davey@nomadstreet.com", phone: "(555) 201-3001" } },
+            { id: 202, categoryId: "catering", tier: "Buffet Style", name: "The Rustic Fork Buffet Co.", price: 4200, services: ["Carved roast and grain salad stations", "Passed cocktail hour hors d'oeuvres", "Coffee & dessert display"], contact: { name: "Elena Gomez", email: "elena@rusticforkcatering.com", phone: "(555) 201-3002" } },
+            { id: 203, categoryId: "catering", tier: "Plated Classic", name: "Artisan Plated Culinary", price: 5800, services: ["3-Course seasonal dinner", "Full licensed bartending & service staff", "Champagne toast pour"], contact: { name: "Chef Marcus", email: "marcus@artisanplated.com", phone: "(555) 201-3003" } },
+            { id: 204, categoryId: "catering", tier: "Fine Dining", name: "Symphony Epicurean", price: 8200, services: ["4-Course wine-paired dinner", "Oyster and charcuterie station", "Full crystal glassware and flatware"], contact: { name: "Camille Dupont", email: "camille@symphonyepicure.com", phone: "(555) 201-3004" } },
+            { id: 205, categoryId: "catering", tier: "Michelin Inspired", name: "Aethelgard Gastronomy", price: 12500, services: ["Custom tasting menu by Exec Chef", "Farm-to-table organic provenance", "Dedicated table captains"], contact: { name: "Harrison Blair", email: "blair@aethelgard.com", phone: "(555) 201-3005" } },
+
+            // PHOTOGRAPHY
+            { id: 301, categoryId: "photography", tier: "Essential", name: "True Tone Snapshots", price: 1600, services: ["5 hours wedding ceremony coverage", "300+ edited digital high-res photos", "Online viewing gallery"], contact: { name: "Leo Miller", email: "leo@truetonesnaps.com", phone: "(555) 301-4001" } },
+            { id: 302, categoryId: "photography", tier: "Contemporary", name: "Atelier Lumière Photo", price: 2900, services: ["8 hours editorial documentary coverage", "Complimentary engagement shoot", "Full printing rights"], contact: { name: "Claire Delacroix", email: "hello@atelierlumiere.com", phone: "(555) 301-4002" } },
+            { id: 303, categoryId: "photography", tier: "Two-Shooter", name: "North Star Stills", price: 3800, services: ["10 hours coverage with 2 shooters", "Sneak peek album within 48 hours", "10x10 custom linen photo album"], contact: { name: "Marcus Stone", email: "marcus@northstarcinema.com", phone: "(555) 301-4003" } },
+            { id: 304, categoryId: "photography", tier: "Film & Digital", name: "Velvet & Grain Visuals", price: 5200, services: ["Medium format film + digital mix", "Full weekend coverage", "Handcrafted leather wedding album"], contact: { name: "Sienna Croft", email: "sienna@velvetandgrain.com", phone: "(555) 301-4004" } },
+            { id: 305, categoryId: "photography", tier: "Editorial", name: "Archibald & Co. Studios", price: 7500, services: ["Lead celebrity photographer", "Studio portrait lighting setup", "Archival prints & cloud storage"], contact: { name: "Nigel Archibald", email: "nigel@archibaldstudio.com", phone: "(555) 301-4005" } },
+
+            // VIDEOGRAPHY
+            { id: 401, categoryId: "videography", tier: "Highlight Reel", name: "Short & Sweet Motion", price: 1400, services: ["4 hours reception and ceremony filming", "3-5 minute musical highlight film", "Digital download in 1080p"], contact: { name: "Kyle Chen", email: "kyle@shortsweetmotion.com", phone: "(555) 401-5001" } },
+            { id: 402, categoryId: "videography", tier: "Cinematic Standard", name: "Kinetic Frame Cinema", price: 2400, services: ["7-10 minute 4K cinematic film", "Full raw ceremony & speech multicam", "Drone aerial footage included"], contact: { name: "Tyler Bailey", email: "tyler@kineticframe.com", phone: "(555) 401-5002" } },
+            { id: 403, categoryId: "videography", tier: "Dual Cinematography", name: "Golden Hour Motion Co.", price: 3400, services: ["Two cinema shooters for 8 hours", "Full speeches & first dances cut", "Social media vertical reel in 48 hours"], contact: { name: "Alana Wright", email: "alana@goldenhourmotion.com", phone: "(555) 401-5003" } },
+            { id: 404, categoryId: "videography", tier: "Docu-Feature", name: "Silver Screen Love Story", price: 4800, services: ["Documentary feature film (20-30 min)", "Audio master of vows and interviews", "Raw 4K footage on SSD hard drive"], contact: { name: "Jordan Ellis", email: "jordan@silverscreenlove.com", phone: "(555) 401-5004" } },
+            { id: 405, categoryId: "videography", tier: "Super 8 Vintage", name: "Lumière Cinematheque", price: 6500, services: ["Kodak Super 8mm vintage film + 6K digital", "Director-level creative editing team", "Private virtual screening link"], contact: { name: "Genevieve Moreau", email: "hello@lumierecinematheque.com", phone: "(555) 401-5005" } },
+
+            // FLOWERS
+            { id: 501, categoryId: "flowers", tier: "Minimalist", name: "Wildflower Bud Co.", price: 1200, services: ["Bouquet and boutonniere", "4 minimalist bridesmaid posies", "Repurposable ceremony aisle jars"], contact: { name: "Tara Bell", email: "tara@wildflowerbud.com", phone: "(555) 501-6001" } },
+            { id: 502, categoryId: "flowers", tier: "Classic Garden", name: "Petals & Thistle Botanical", price: 2300, services: ["Full bridal party floral package", "Arbor floral installation", "Delivery, setup, and teardown"], contact: { name: "Sora Kim", email: "sora@petalsandthistle.com", phone: "(555) 501-6002" } },
+            { id: 503, categoryId: "flowers", tier: "Full Reception", name: "Meadowland Floral Design", price: 3400, services: ["Seasonal organic local florals", "15 lush centerpiece arrangements", "Sweetheart table installation"], contact: { name: "Rachel Adams", email: "orders@meadowlandfloral.com", phone: "(555) 501-6003" } },
+            { id: 504, categoryId: "flowers", tier: "Architectural", name: "Flora & Form Sculpture Studio", price: 5100, services: ["Hanging floral chandeliers", "Grand entryway arch with roses", "Full cocktail lounge floral decor"], contact: { name: "Mateo Ortiz", email: "mateo@floraandform.com", phone: "(555) 501-6004" } },
+            { id: 505, categoryId: "flowers", tier: "High-Couture", name: "The Royal Petalier", price: 8000, services: ["Imported luxury blooms", "Floor-to-ceiling statement walls", "On-site floristry team all day"], contact: { name: "Evelyn Saint-Clair", email: "evelyn@royalpetalier.com", phone: "(555) 501-6005" } },
+
+            // DJ
+            { id: 601, categoryId: "dj", tier: "Reception Essentials", name: "Beatline Entertainment", price: 950, services: ["4 hours reception party DJ", "Two-speaker PA sound system", "Wireless microphone for toasts"], contact: { name: "DJ Ryan K", email: "ryan@beatline.com", phone: "(555) 601-7001" } },
+            { id: 602, categoryId: "dj", tier: "Full-Night Host", name: "Aura Sound Collective", price: 1650, services: ["Ceremony, cocktail hour & reception", "MC announcements & schedule management", "Intelligent dance floor lighting"], contact: { name: "Devon Reed", email: "booking@aurasound.com", phone: "(555) 601-7002" } },
+            { id: 603, categoryId: "dj", tier: "Hybrid Live & DJ", name: "Vanguard Acoustic Strings & DJ", price: 2400, services: ["Acoustic duo for ceremony", "5-hour reception DJ package", "Full venue wireless audio sync"], contact: { name: "Liam Vance", email: "liam@vanguardmusic.com", phone: "(555) 601-7003" } },
+            { id: 604, categoryId: "dj", tier: "Club & Production", name: "Soundwave Premier Nightlife", price: 3400, services: ["Club-caliber festival DJ & MC duo", "Wireless ballroom uplighting package", "Cold spark machine exit package"], contact: { name: "Zack Taylor", email: "zack@soundwavepremier.com", phone: "(555) 601-7004" } },
+            { id: 605, categoryId: "dj", tier: "DJ & Live Brass", name: "The Manhattan Fusion Ensemble", price: 5500, services: ["DJ integrated with live saxophone", "Custom live remixes of requested songs", "Full concert sound engineering team"], contact: { name: "Alexander Grey", email: "alex@manhattanfusion.com", phone: "(555) 601-7005" } }
+        ];
+
+        let activeCategory = "venue";
+        const selectedVendors = {};
+
+        function formatCurrency(amount) {
+            return amount.toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                maximumFractionDigits: 0
+            });
+        }
+
+        function getCurrentCategoryBudget(catId) {
+            const inputEl = document.getElementById(`cat-${catId}`);
+            if (inputEl) return parseFloat(inputEl.value) || 0;
+            const cat = categories.find(c => c.id === catId);
+            return cat ? cat.defaultBudget : 0;
+        }
+
+        function initCategoryInputs() {
+            const grid = document.getElementById("categoryGrid");
+            grid.innerHTML = categories.map(cat => `
+                <div class="category-card">
+                    <label for="cat-${cat.id}">${cat.name}</label>
+                    <div class="input-symbol-wrapper">
+                        <span>$</span>
+                        <input 
+                            type="number" 
+                            id="cat-${cat.id}" 
+                            class="cat-input" 
+                            value="${cat.defaultBudget}" 
+                            step="${cat.step}" 
+                            min="0"
+                            oninput="updateCategoryBudgetUI('${cat.id}')"
+                        >
+                    </div>
+                    <div class="category-status" id="status-${cat.id}">
+                        <span>No vendor chosen</span>
+                    </div>
+                </div>
+            `).join("");
+
+            updateCategoryBudgetUI();
+        }
+
+        function updateCategoryBudgetUI() {
+            categories.forEach(cat => {
+                const inputEl = document.getElementById(`cat-${cat.id}`);
+                const statusEl = document.getElementById(`status-${cat.id}`);
+                if (!inputEl || !statusEl) return;
+
+                const budgetVal = parseFloat(inputEl.value) || 0;
+                const selectedVendorId = selectedVendors[cat.id];
+                const selectedVendor = vendors.find(v => v.id === selectedVendorId);
+
+                if (selectedVendor && selectedVendor.price > budgetVal) {
+                    delete selectedVendors[cat.id];
+                    statusEl.innerHTML = `<span>No vendor chosen</span>`;
+                } else if (selectedVendor) {
+                    const diff = budgetVal - selectedVendor.price;
+                    statusEl.innerHTML = `<span class="status-ok">Under: +${formatCurrency(diff)}</span>`;
+                } else {
+                    statusEl.innerHTML = `<span>No vendor chosen</span>`;
+                }
+            });
+
+            updateTotals();
+            renderVendors();
+            renderSummaryTable();
+        }
+
+        function renderTabs() {
+            const tabs = document.getElementById("categoryTabs");
+            tabs.innerHTML = categories.map(cat => `
+                <button 
+                    class="tab-btn ${activeCategory === cat.id ? 'active' : ''}" 
+                    onclick="switchCategory('${cat.id}')">
+                    ${cat.name}
+                </button>
+            `).join("");
+        }
+
+        function renderVendors() {
+            const container = document.getElementById("vendorGrid");
+            const targetBudget = getCurrentCategoryBudget(activeCategory);
+
+            const filtered = vendors
+                .filter(v => v.categoryId === activeCategory && v.price <= targetBudget)
+                .sort((a, b) => b.price - a.price);
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-vendor-notice">
+                        <h3 style="font-family: var(--font-serif); font-size: 1.8rem; color: var(--navy-dark); margin-bottom: 0.5rem;">No Vendors Under ${formatCurrency(targetBudget)}</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Increase your budget in the planner above to view available vendors.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map(v => {
+                const isSelected = selectedVendors[v.categoryId] === v.id;
+
+                return `
+                    <div class="vendor-card ${isSelected ? 'selected' : ''}">
+                        ${isSelected ? '<span class="badge-selected">Selected</span>' : ''}
+
+                        <div>
+                            <div class="vendor-header">
+                                <h3 class="vendor-name">${v.name}</h3>
+                                <div class="vendor-price-wrap">
+                                    <span class="vendor-price">${formatCurrency(v.price)}</span>
+                                    <span class="vendor-tier">• ${v.tier}</span>
+                                </div>
+                            </div>
+
+                            <div class="vendor-services">
+                                <h4>Included Services</h4>
+                                <ul class="service-list">
+                                    ${v.services.map(s => `<li>${s}</li>`).join("")}
+                                </ul>
+                            </div>
+
+                            <div class="vendor-contact">
+                                <p><strong>Direct Contact:</strong> ${v.contact.name}</p>
+                                <p><strong>Email:</strong> <a href="mailto:${v.contact.email}">${v.contact.email}</a></p>
+                                <p><strong>Phone:</strong> ${v.contact.phone}</p>
+                            </div>
+                        </div>
+
+                        <button 
+                            class="select-btn ${isSelected ? 'selected' : ''}" 
+                            onclick="toggleSelectVendor('${v.categoryId}', ${v.id})">
+                            ${isSelected ? 'Selected' : 'Select Vendor'}
+                        </button>
+                    </div>
+                `;
+            }).join("");
+        }
+
+        function switchCategory(catId) {
+            activeCategory = catId;
+            renderTabs();
+            renderVendors();
+        }
+
+        function toggleSelectVendor(categoryId, vendorId) {
+            if (selectedVendors[categoryId] === vendorId) {
+                delete selectedVendors[categoryId];
+            } else {
+                selectedVendors[categoryId] = vendorId;
+            }
+            updateCategoryBudgetUI();
+            renderVendors();
+            renderSummaryTable();
+        }
+
+        function updateTotals() {
+            const inputs = document.querySelectorAll('.cat-input');
+            let targetSum = 0;
+            inputs.forEach(input => {
+                targetSum += parseFloat(input.value) || 0;
+            });
+
+            const selectedSum = Object.values(selectedVendors).reduce((sum, vId) => {
+                const vendor = vendors.find(v => v.id === vId);
+                return sum + (vendor ? vendor.price : 0);
+            }, 0);
+
+            document.getElementById('targetDisplay').innerText = formatCurrency(targetSum);
+            document.getElementById('selectedTotalDisplay').innerText = formatCurrency(selectedSum);
+        }
+
+        function renderSummaryTable() {
+            const tbody = document.getElementById("summaryTableBody");
+            const rows = categories.map(cat => {
+                const vId = selectedVendors[cat.id];
+                const vendor = vendors.find(v => v.id === vId);
+
+                if (vendor) {
+                    return `
+                        <tr>
+                            <td><strong>${cat.name}</strong></td>
+                            <td>${vendor.name}</td>
+                            <td style="color: var(--gold-accent); font-weight: 600;">${formatCurrency(vendor.price)}</td>
+                            <td>${vendor.contact.name} (${vendor.contact.email})</td>
+                        </tr>
+                    `;
+                } else {
+                    return `
+                        <tr style="opacity: 0.5;">
+                            <td><strong>${cat.name}</strong></td>
+                            <td><em>None selected</em></td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                    `;
+                }
+            }).join("");
+
+            tbody.innerHTML = rows;
+        }
+
+        initCategoryInputs();
+        renderTabs();
+        renderVendors();
+        renderSummaryTable();
+    </script>
+</body>
+</html>
